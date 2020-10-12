@@ -20,7 +20,6 @@ body {
 .mainmanu {
     display: inline-block;
     position: static;
-    background-color: white;
 }
 
 .left {
@@ -32,6 +31,7 @@ body {
     max-width: 86%!important;
     height: 50px;
     margin-top: 3px;
+    margin-left: 50px;
     width: 240px;
 }
 
@@ -139,6 +139,8 @@ header a:active {
     text-align: center;
     font-weight: bold;
     color: white;
+    min-height: 350px;
+    padding-top: 40px;
 }
 
 .left-about {
@@ -219,8 +221,8 @@ footer {
 
 .bottom-right {
     float: right;
-    width: 50%;
     padding: 0px;
+    display: inline-block;
 }
 
 .bottom-right li {
@@ -228,7 +230,8 @@ footer {
 }
 
 .bottom-left {
-    width: 50%
+    width: 50%;
+    display: inline-block;
 }
 
 .contact-form .contact-input {
@@ -274,6 +277,18 @@ footer {
 .parents-right p,
 .parents-left p {
     margin: 0px
+}
+
+.contect-left {
+    width: 30%;
+    display: inline-block;
+    float: left;
+}
+
+.contect-right {
+    width: 70%;
+    display: inline-block;
+    float: right;
 }
 
 @media screen and (max-width: 768px) {
@@ -333,6 +348,9 @@ footer {
     }
     .container h1 {
         font-size: inherit;
+    }
+    ul.right {
+        background-color: white;
     }
 }
 
