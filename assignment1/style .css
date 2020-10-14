@@ -45,7 +45,7 @@ body {
 .right li {
     list-style-type: none;
     list-style: none;
-    margin: auto;
+    margin-right: 10px;
 }
 
 .right span,
@@ -62,8 +62,7 @@ ul.right {
 
 header a:hover {
     font-weight: bold;
-    color: rgb(196, 240, 2);
-    background-color: yellow;
+    text-decoration: none;
 }
 
 header a:active {
@@ -85,7 +84,7 @@ header a:active {
     float: left;
     list-style-type: none;
     font-size: medium;
-    margin-right: 3px;
+    margin-right: 20px;
 }
 
 .slideshow-container {
@@ -143,11 +142,17 @@ header a:active {
     padding-top: 40px;
 }
 
+.asset p {
+    margin: 5px;
+    display: inline-block;
+}
+
 .left-about {
     float: left;
     display: inline-block;
     overflow: hidden;
     width: 50%;
+    margin-top: 20px;
 }
 
 .right-about {
@@ -155,6 +160,8 @@ header a:active {
     float: right;
     width: 50%;
     display: inline-block;
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
 
 .right-about .buttion {
@@ -227,6 +234,10 @@ footer {
 
 .bottom-right li {
     list-style-type: none;
+}
+
+footer a:hover {
+    text-decoration: none;
 }
 
 .bottom-left {
