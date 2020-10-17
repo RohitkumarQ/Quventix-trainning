@@ -302,6 +302,20 @@ footer a:hover {
     float: right;
 }
 
+.row li {
+    list-style-type: none;
+}
+
+.mygallery {
+    padding-left: 15%;
+}
+
+.mygallery img {
+    width: 25%;
+    margin-bottom: 20px;
+    max-height: 200px;
+}
+
 @media screen and (max-width: 768px) {
     .asset,
     .left-about,
@@ -319,7 +333,8 @@ footer a:hover {
     .parents-right,
     .bottom-right,
     .bottom-left,
-    .mainmanu {
+    .mainmanu,
+    .mygallery img {
         width: 100%;
         margin-left: 0px;
     }
@@ -363,8 +378,16 @@ footer a:hover {
     ul.right {
         background-color: white;
     }
+    .mygallery {
+        padding-left: 20px;
+        padding-right: 20px;
+    }
 }
 
 .icon {
     display: none;
+}
+
+.lb-nav a.lb-next {
+    width: 30%;
 }
