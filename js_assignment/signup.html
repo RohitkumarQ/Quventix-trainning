@@ -101,12 +101,13 @@
                 return false;
             }
 
+
             document.cookie = "rollno=" + roll;
             document.cookie = "fname=" + fname;
             document.cookie = "lname=" + lname;
             document.cookie = "email=" + email;
-            document.cookie = "password=" + pass;
-            document.cookie = "cpassword=" + cpass;
+            document.cookie = "password=" + pass + "; secure";
+            document.cookie = "cpassword=" + cpass + "; secure";
 
             localStorage.setItem('rollno', roll);
             localStorage.setItem('fname', fname);

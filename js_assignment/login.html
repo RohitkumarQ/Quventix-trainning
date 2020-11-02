@@ -19,7 +19,7 @@
 
                     <h4 class="text-center">Student Login</h4>
                     <hr>
-                    <form name="myForm" action="welcome.html" onsubmit="return validateForm()" method="post">
+                    <form name="myForm" action="index.html" onsubmit="return validateForm()" method="post">
 
                         <div class="form-group">
                             <label for="uname">Roll no</label>
@@ -51,7 +51,7 @@
             var myroll = localStorage.getItem("rollno");
             var mypass = localStorage.getItem("password");
             var myname = localStorage.getItem("fname");
-            window.alert("welcome" + " " + myname);
+
 
             if (roll !== myroll) {
                 alert("Invalid rollno or password");
@@ -61,9 +61,10 @@
                 alert("Invalid rollno or password");
                 return false;
             } else {
-
+                window.alert("welcome" + " " + myname);
                 return true;
             }
+            window.alert("welcome" + " " + myname);
 
         }
     </script>
