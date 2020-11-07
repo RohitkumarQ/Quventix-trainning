@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <link data-require="bootstrap@4.1.1" data-semver="4.1.1" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" />
+
+    <style>
+        body {
+            margin: 10px;
+        }
+        
+        label {
+            width: 20%;
+        }
+        
+        #task_wrapper {
+            margin-left: 10px;
+        }
+        
+        #save_task {
+            margin-left: 20%;
+        }
+        
+        #task_wrapper {
+            margin-left: 10px;
+        }
+        
+        #task_wrapper {
+            list-style: none;
+        }
+        
+        #task_wrapper li {
+            padding-bottom: 5px;
+        }
+        
+        .remove_item {
+            color: red;
+            padding: 10px 5px 10px 10px;
+            text-align: right;
+        }
+        
+        .clickeable {
+            cursor: pointer;
+        }
+        
+        .update_icon {
+            color: green;
+            padding: 10px 10px 10px 0;
+        }
+        
+        .show {
+            display: block;
+        }
+        
+        .hide {
+            display: none;
+        }
+        
+        .container #text {
+            margin-left: 20px;
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Local Storage</h1>
+    <div id="container">
+        <form>
+            <div>
+                <label for="task_des">Name</label>
+                <input id="task_des" type="text" />
+            </div>
+            <div>
+                <label for="task_state">State</label>
+                <input id="task_state" type="text" />
+            </div>
+            <div>
+                <button id="save_task" type="button">Create</button>
+            </div>
+        </form>
+    </div>
+    <hr />
+    <div id="container">
+        <h2>Task List</h2>
+        <ul id="task_wrapper"></ul>
+    </div>
+    <script>
+        (function() {
+            'use strict';
+            var lastId = 0;
+            var taskWrapper = document.getElementById("task_wrapper");
+            var btnSave = document.getElementById("save_task");
+            var removeIcon;
+            var updateIcon;
+            var taskList;
+
+            // Initialize taskList 
+            // Add event to save button
+            // Render the list
+
+            function init() {
+
+                if (!!(window.localStorage.getItem('taskList'))) {
+                    taskList = JSON.parse(window.localStorage.getItem('taskList'));
+                } else {
+                    taskList = [];
+                }
+                btnSave.addEventListener('click', saveTask);
+                showList();
+            }
+
+            //End Init
+
+            //CRUD task
+
+            function showList() {
+
+                if (!!taskList.length) {
+                    getLastTaskId();
+                    for (var item in taskList) {
+                        var task = taskList[item];
+                        addTaskToList(task);
+                    }
+                    syncEvents();
+                }
+
+            }
+
+            function saveTask(event) {
+
+                var task = {
+                    taskId: lastId,
+                    taskDes: document.getElementById("task_des").value,
+                    taskState: document.getElementById("task_state").value
+                };
+                taskList.push(task);
+                syncTask();
+                addTaskToList(task);
+                syncEvents();
+                lastId++;
+            }
+
+            function addTaskToList(task) {
+
+                var removeIcon = document.createElement('span');
+                var element = document.createElement('li');
+                var updateIcon = document.createElement('span');
+
+                removeIcon.innerHTML = "DELETE";
+                removeIcon.className = "remove_item clickeable";
+                removeIcon.setAttribute("title", "Remove");
+
+                updateIcon.innerHTML = "UPDATE";
+                updateIcon.className = "update_icon clickeable";
+                updateIcon.setAttribute("title", "Update");
+
+                element.setAttribute("id", task.taskId);
+                element.innerHTML += task.taskDes;
+                taskWrapper.appendChild(element);
+                element.appendChild(removeIcon);
+                element.appendChild(updateIcon);
+
+            }
+
+            function updateTask(event) {
+
+                var taskTag = event.currentTarget.parentNode;
+                var taskId = taskTag.id;
+                var taskToUpdate = findTask(taskId).task;
+                var pos = findTask(taskId).pos;
+                if (!!taskToUpdate) {
+                    var des = prompt("Name", taskToUpdate.taskDes);
+                    var state = prompt("State", taskToUpdate.taskState);
+                    taskToUpdate.taskDes = des;
+                    taskToUpdate.taskState = state;
+                    taskList[pos] = taskToUpdate;
+                    taskTag.lastChild.textContent = taskToUpdate.taskDes;
+                    syncTask();
+                }
+            }
+
+            function removeTask(event) {
+
+                var taskToRemove = event.currentTarget.parentNode;
+                var taskId = taskToRemove.id;
+                taskWrapper.removeChild(taskToRemove);
+                taskList.forEach(function(value, i) {
+                    if (value.taskId == taskId) {
+                        taskList.splice(i, 1);
+                    }
+                })
+
+                syncTask();
+            }
+
+            // End CRUD
+
+
+            //Common
+
+            function syncTask() {
+
+                window.localStorage.setItem('taskList', JSON.stringify(taskList));
+                taskList = JSON.parse(window.localStorage.getItem('taskList'));
+            }
+
+            function getLastTaskId() {
+                var lastTask = taskList[taskList.length - 1];
+                lastId = lastTask.taskId + 1;
+            }
+
+            function syncEvents() {
+
+                updateIcon = document.getElementsByClassName("update_icon");
+                removeIcon = document.getElementsByClassName("remove_item");
+                if (!!removeIcon.length) {
+                    for (var i = 0; i < removeIcon.length; i++) {
+                        removeIcon[i].addEventListener('click', removeTask);
+                    }
+                }
+                if (!!updateIcon.length) {
+                    for (var j = 0; j < updateIcon.length; j++) {
+                        updateIcon[j].addEventListener('click', updateTask);
+                    }
+                }
+            }
+
+            function findTask(id) {
+
+                var response = {
+                    task: '',
+                    pos: 0
+                };
+                taskList.forEach(function(value, i) {
+                    if (value.taskId == id) {
+                        response.task = value;
+                        response.pos = i;
+                    }
+                });
+
+                return response;
+            }
+
+            //End Common
+
+
+            init();
+
+
+        })();
+    </script>
+</body>
+
+</html>

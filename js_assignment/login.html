@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.19.1/css/mdb.min.css" rel="stylesheet">
+    <title>Login</title>
+
+</head>
+
+<body class="teal lighten-5">
+
+    <section>
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-md-3 p-5 aqua-gradient mt-5 shadow-lg rounded">
+
+                    <h4 class="text-center">Student Login</h4>
+                    <hr>
+                    <form name="myForm" action="index.html" onsubmit="return validateForm()" method="post">
+
+                        <div class="form-group">
+                            <label for="uname">Roll no</label>
+                            <input type="number" class="form-control" placeholder="Enter Employee Id" name="roll">
+                        </div>
+
+
+                        <div class="form-group">
+                            <label for="psw">Password</label>
+                            <input type="password" class="form-control" placeholder="Enter Password" name="pass">
+                        </div>
+                        <div class="row">
+                            <div class="col-md-5 col-sm-5 form-group">
+                                <input type="submit" name="submit" class="btn btn-indigo" value="Login">
+                            </div>
+                            <div class="col-md-7 col-sm-7 form-group">
+                                <a class="btn btn-dark-green  w-100" href="signup.html">Sign-Up</a>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script>
+        function validateForm() {
+            var roll = document.forms["myForm"]["roll"].value;
+            var pass = document.forms["myForm"]["pass"].value;
+            var myroll = localStorage.getItem("rollno");
+            var mypass = localStorage.getItem("password");
+            var myname = localStorage.getItem("fname");
+
+
+            if (roll !== myroll) {
+                alert("Invalid rollno or password");
+                return false;
+            }
+            if (pass !== mypass) {
+                alert("Invalid rollno or password");
+                return false;
+            } else {
+                window.alert("welcome" + " " + myname);
+                return true;
+            }
+            window.alert("welcome" + " " + myname);
+
+        }
+    </script>
+
+</body>
+
+</html>
